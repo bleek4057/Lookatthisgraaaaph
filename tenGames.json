@@ -1,0 +1,481 @@
+[
+{
+    "metadata":{
+        "blackelo":"2470",
+        "whiteelo":"2764"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Gelfand, Boris",
+    "black":"Rahman, Ziaur",
+    "result":"1-0",
+    "eco":"A40",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"d4"
+        },
+        {
+            "m":"e6"
+        },
+        {
+            "m":"c4"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"Nf3"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"Bb4"
+        },
+        {
+            "m":"Bg4"
+        },
+        {
+            "m":"h6"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2757",
+        "whiteelo":"2487"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"El Gindy, Essam",
+    "black":"Dominguez Perez, Leinier",
+    "result":"0-1",
+    "eco":"D85",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"d4"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"c4"
+        },
+        {
+            "m":"g6"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"cxd5"
+        },
+        {
+            "m":"Nxd5"
+        },
+        {
+            "m":"e3"
+        },
+        {
+            "m":"Bg7"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2747",
+        "whiteelo":"2500"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Liu, Qingnan",
+    "black":"Wang, Hao",
+    "result":"1/2-1/2",
+    "eco":"C13",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"e4"
+        },
+        {
+            "m":"e6"
+        },
+        {
+            "m":"d4"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"Bg5"
+        },
+        {
+            "m":"dxe4"
+        },
+        {
+            "m":"Nxe4"
+        },
+        {
+            "m":"Nbd7"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2500",
+        "whiteelo":"2746"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Svidler, Peter",
+    "black":"Ushenina, Anna",
+    "result":"1-0",
+    "eco":"B51",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"e4"
+        },
+        {
+            "m":"c5"
+        },
+        {
+            "m":"Nf3"
+        },
+        {
+            "m":"d6"
+        },
+        {
+            "m":"Bb5+"
+        },
+        {
+            "m":"Nd7"
+        },
+        {
+            "m":"O-O"
+        },
+        {
+            "m":"a6"
+        },
+        {
+            "m":"Bd3"
+        },
+        {
+            "m":"Ngf6"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2740",
+        "whiteelo":"2512"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Wan, Yunguo",
+    "black":"Adams, Michael",
+    "result":"1/2-1/2",
+    "eco":"C45",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"e4"
+        },
+        {
+            "m":"e5"
+        },
+        {
+            "m":"Nf3"
+        },
+        {
+            "m":"Nc6"
+        },
+        {
+            "m":"d4"
+        },
+        {
+            "m":"exd4"
+        },
+        {
+            "m":"Nxd4"
+        },
+        {
+            "m":"Bc5"
+        },
+        {
+            "m":"Nb3"
+        },
+        {
+            "m":"Bb6"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2519",
+        "whiteelo":"2744"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Leko, Peter",
+    "black":"Johannessen, Leif Erlend",
+    "result":"1-0",
+    "eco":"C80",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"e4"
+        },
+        {
+            "m":"e5"
+        },
+        {
+            "m":"Nf3"
+        },
+        {
+            "m":"Nc6"
+        },
+        {
+            "m":"Bb5"
+        },
+        {
+            "m":"a6"
+        },
+        {
+            "m":"Ba4"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"O-O"
+        },
+        {
+            "m":"Nxe4"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2739",
+        "whiteelo":"2524"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Sambuev, Bator",
+    "black":"Morozevich, Alexander",
+    "result":"1-0",
+    "eco":"D87",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"d4"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"c4"
+        },
+        {
+            "m":"g6"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"cxd5"
+        },
+        {
+            "m":"Nxd5"
+        },
+        {
+            "m":"e4"
+        },
+        {
+            "m":"Nxc3"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2539",
+        "whiteelo":"2719"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Vitiugov, Nikita",
+    "black":"Holt, Conrad",
+    "result":"",
+    "eco":"D17",
+    "plycount":"1-0",
+    "moves":[
+        {
+            "m":"d4"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"c4"
+        },
+        {
+            "m":"c6"
+        },
+        {
+            "m":"Nf3"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"dxc4"
+        },
+        {
+            "m":"a4"
+        },
+        {
+            "m":"Bf5"
+        }
+    ]
+},
+
+{
+    "metadata":{
+        "blackelo":"2737",
+        "whiteelo":"2556"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Salem, A R Saleh",
+    "black":"Giri, Anish",
+    "result":"0-1",
+    "eco":"D31",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"d4"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"c4"
+        },
+        {
+            "m":"e6"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"Be7"
+        },
+        {
+            "m":"Nf3"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"Bg5"
+        },
+        {
+            "m":"h6"
+        }
+    ]
+},
+ 
+{
+    "metadata":{
+        "blackelo":"2534",
+        "whiteelo":"2731"
+    },
+    "event":"World Cup",
+    "site":"?",
+    "date":"2013.08.11",
+    "round":"?",
+    "white":"Ivanchuk, Vassily",
+    "black":"Duda, Jan-Krzysztof",
+    "result":"1/2-1/2",
+    "eco":"E36",
+    "plycount":"",
+    "moves":[
+        {
+            "m":"d4"
+        },
+        {
+            "m":"Nf6"
+        },
+        {
+            "m":"c4"
+        },
+        {
+            "m":"e6"
+        },
+        {
+            "m":"Nc3"
+        },
+        {
+            "m":"Bd4"
+        },
+        {
+            "m":"Qc2"
+        },
+        {
+            "m":"d5"
+        },
+        {
+            "m":"a3"
+        },
+        {
+            "m":"Bxc3+"
+        }
+    ]
+}
+]
