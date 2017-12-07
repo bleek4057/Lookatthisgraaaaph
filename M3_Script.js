@@ -27,14 +27,14 @@ function loadPieChart(mCountMin, mCountMax){
         for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
             let n = true;
             for(let k = 0; k < dic.length; k++){
-                if(dic[k].label == theData[i].moves[j].m){ 
+                if(dic[k].label == theData[i].moves[j]){ 
                     dic[k].value++; 
                     n = false;
                     break;
                 }
             }
             if(n){
-                dic.push({"label": theData[i].moves[j].m, "value" : 1});
+                dic.push({"label": theData[i].moves[j], "value" : 1});
             }
         }
     }
@@ -77,12 +77,13 @@ function loadPieChart(mCountMin, mCountMax){
 }
 
 function readData(){
-    d3.json("tenGames.json", function(data){
+    d3.json("GMallboth(5%).json", function(data){
         theData = data;
+        console.log("HIT")
         console.log(data);
         console.log(theData);
-    
         loadPieChart(0, 8);
+        
         
     });
 }
