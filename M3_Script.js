@@ -76,6 +76,45 @@ function loadPieChart(mCountMin, mCountMax){
         .text("Common Opening Moves");
 }
 
+function loadHeatMap(mCountMin, mCountMax) {
+    
+    var board = new Array();
+
+    for (let i = 0; i < 8; i++) {//create new board
+         board[i] = new Array();
+         for (let j = 0; j < 8; j++) {
+            board[i][j] = 0;
+         }
+    }
+
+    
+    for(let i = 0; i < theData.length; i++){ //use moves
+        for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
+        
+            if(theData[i].moves[j] == "O-O" || theData[i].moves[j] == "O-O-O"){ //castling
+                if(theData[i].moves[j] == "O-O" && j%2 == 0){board[0][6]++;} //white castle king side
+                else if(theData[i].moves[j] == "O-O" && j%2 == 1){board[7][6]++;}//black castle king side
+                else if(theData[i].moves[j] == "O-O-O" && j%2 == 0){board[0][2]++;}//white castle queen side
+                else if(theData[i].moves[j] == "O-O-O" && j%2 == 1){board[7][2]++;}//black castle king side
+            }
+            else{ //normal move
+                let xPos = -1;
+                let yPos = -1;
+                for(let k = 1; k < theData[i].moves[j].length; k++){
+                    if(!isNaN(parseInt(theData[i].moves[j].charAt(k)))){ //checks to see if it is a number
+                        xPos = theData[i].moves[j].charAt(k-1);
+                        yPos = parseInt(theData[i].moves[j].charAt(k));
+                        board[yPos][xPos]++;
+                        break;
+                    }
+                }
+            }
+            
+        }
+    }
+    
+}
+
 function readData(){
     d3.json("GMallboth(5%).json", function(data){
         theData = data;
