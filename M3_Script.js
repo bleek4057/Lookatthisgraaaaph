@@ -3,6 +3,7 @@ var theData = [];
 var svg;
 var width = 600;
 var height = 600;
+var offset = 60;
 
 var g;
 
@@ -98,7 +99,7 @@ function loadHeatMap(mCountMin, mCountMax) {
                 for(let k = 1; k < theData[i].moves[j].length; k++){
                     if(!isNaN(parseInt(theData[i].moves[j].charAt(k)))){ //checks to see if it is a number
                         xPos = theData[i].moves[j].charCodeAt(k-1)-97;//ascii for a is 97
-                        yPos = parseInt(theData[i].moves[j].charAt(k));
+                        yPos = 7-(parseInt(theData[i].moves[j].charAt(k))-1);
                         board[xPos][yPos]++;
                         break;
                     }
@@ -107,6 +108,12 @@ function loadHeatMap(mCountMin, mCountMax) {
             
         }
     }
+    
+    //lines
+    svg.append("line").attr("x1", offset/2).attr("y1", offset/2).attr("x2", width + offset/2).attr("y2", offset/2).attr("stroke-width", 1).attr("stroke", "black");//top
+    svg.append("line").attr("x1", offset/2).attr("y1", height + offset/2).attr("x2", width + offset/2).attr("y2", height + offset/2).attr("stroke-width", 1).attr("stroke", "black");//bottom
+    svg.append("line").attr("x1", offset/2).attr("y1", offset/2).attr("x2", offset/2).attr("y2", height + offset/2).attr("stroke-width", 1).attr("stroke", "black");//left
+    svg.append("line").attr("x1", width + offset/2).attr("y1", offset/2).attr("x2", width + offset/2).attr("y2", height + offset/2).attr("stroke-width", 1).attr("stroke", "black");//right
     
     let maxNum = 0;
     for (let i = 0; i < 8; i++) {
@@ -135,11 +142,28 @@ function loadHeatMap(mCountMin, mCountMax) {
              let rectangle = g.append("rect")
                              .attr("width", w)
                              .attr("height", h)
-                             .attr("x", y)
-                             .attr("y", x)
-                             .attr("fill","rgba(255,0,0,.5)");
+                             .attr("x", x)
+                             .attr("y", y)
+                             .attr("fill","rgba(255,0,0,.75)");
          }
     }
+    
+    //x-axis labels
+    for(let i = 8; i >= 1; i--){
+        svg.append("text") //  x-axis labels
+            .attr("x", ((i*width)/8))
+            .attr("y", height + (offset*3/4))
+            .attr("id", "xAxisText")
+            .style("text-anchor", "left")
+            .text(String.fromCharCode(i + 96));
+        
+        svg.append("text") // y-axis labels
+            .attr("x", offset/4)
+            .attr("y", (height + offset) - ((i*height)/8))
+            .attr("id", "xAxisText")
+            .style("text-anchor", "left")
+            .text(i);
+    }  
 }
 
 function returnBoardColor(x, y){
@@ -153,16 +177,16 @@ function readData(){
         //console.log(data);
         console.log(theData);
         //loadPieChart(0, 2);
-        loadHeatMap(0, 6);
+        loadHeatMap(0, 2);
         
     });
 }
 
 window.onload = function(){
     svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", width + offset)
+        .attr("height", height  + offset)
         .style('border', '1px solid');
-    g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    g = svg.append("g").attr("transform", "translate(" + (width + offset) / 2 + "," + (height + offset) / 2 + ")");
     readData(); 
 };
