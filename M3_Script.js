@@ -73,7 +73,6 @@ function loadPieChart(mCountMin, mCountMax){
         .text("Common Opening Moves");
 }
 
-<<<<<<< HEAD
 function loadHeatMap(mCountMin, mCountMax) {
     
     var board = new Array();
@@ -172,14 +171,6 @@ function returnBoardColor(x, y){
     else {return "rgba(0,0,0,1)";}//black
 }
 
-function readData(){
-    d3.json("GMallboth(5%).json", function(data){
-        theData = data;
-        //console.log(data);
-        console.log(theData);
-        //loadPieChart(0, 2);
-        loadHeatMap(0, 2);
-=======
 function loadBarGraph(movesShown, data){
     console.log(data);
     var svg = d3.select("svg"),
@@ -323,15 +314,15 @@ function loadBarGraph(movesShown, data){
         .attr("class", "axis");
 
 }
+
 function readData(){
     d3.json("GMallboth(5%).json", function(data){
         theData = data;
         /*console.log("HIT")
         console.log(data);
         console.log(theData);*/
+        //loadHeatMap(0, 2);
         loadBarGraph(20, theData);
-        
->>>>>>> refs/remotes/origin/master
         
     });
 }
