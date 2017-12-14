@@ -19,7 +19,7 @@ function loadPieChart(mCountMin, mCountMax, sort){
     .outerRadius(radius - 40)
     .innerRadius(radius - 40);
     var grandMasters =[];
-    
+
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
     
     for(let i=0;i<theData.length;i++){
@@ -30,6 +30,15 @@ function loadPieChart(mCountMin, mCountMax, sort){
         
     }
     console.log(grandMasters)
+    grandMasters.sort();
+    grandMasters.shift();
+    for(let i=0;i<grandMasters.length;i++){
+        let gmSelect = document.getElementById("gmSelect");
+        let option = document.createElement("option");
+        option.text=grandMasters[i];
+        gmSelect.add(option);
+    }
+
     var dic = [];
     
     if(sort == 1){ //common opening moves
@@ -479,6 +488,9 @@ function loadGraph(){
                     break;
                case "pie2":
                     loadPieChart(0,6,2);
+                    break;
+               case "pie3":
+                    loadPieChart(0,6,3);
                     break;
                case "heat":
                     loadHeatMap(0, 8);
