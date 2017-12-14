@@ -498,7 +498,7 @@ function loadGraph(){
 }
 
 function readData(){
-    d3.json("GMallboth(5%).json", function(data){
+    d3.json("GMallboth5.json", function(data){
         theData = data;
         //console.log(theData);
         //loadPieChart(0,6);
