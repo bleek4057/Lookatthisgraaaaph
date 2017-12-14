@@ -11,14 +11,19 @@
     
     <body>
         <a href="../../index.html"><button>Return to Index</button></a>
-        <p>
+        <p id="gInfo">
             This pie chart displays common opening moves that Grandmaster Chess players have used during tournaments. It looks at the first 4 turns that were made during a game and displays the number of times a move was used. This graph would help other Chess players improve because it would show them what opening Grandmasters use to play their games. 
         </p>
-        <p>
+        <!-- <p>
             Currently, our group is having a bit of trouble parsing our data correctly from PGN (Portable Game Notation) to JSON. So for this chart, it is only pulling from ten games. Once we fix the parsing, it will be parsing from many thousands of games.
 
-        </p>
-        
+        </p> -->
+        <form id="radioForm">
+            <input type="radio" name="radio" value="pie1" checked> Pie Opening <br/>
+            <input type="radio" name="radio" value="pie2"> Pie Winnings <br/>
+            <input type="radio" name="radio" value="heat"> Heat <br/>
+            <input type="radio" name="radio" value="bar"> Bar <br/>
+        </form>
     </body>
     <!-- https://youtu.be/sIlNIVXpIns -->
 </html>

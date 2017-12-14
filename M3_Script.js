@@ -7,8 +7,7 @@ var offset = 60;
 
 var g;
 
-
-function loadPieChart(mCountMin, mCountMax){
+function loadPieChart(mCountMin, mCountMax, sort){
     
     var dic = [];
     var radius = Math.min(width, height) / 2;
@@ -19,23 +18,72 @@ function loadPieChart(mCountMin, mCountMax){
     var label = d3.arc()
     .outerRadius(radius - 40)
     .innerRadius(radius - 40);
+    var grandMasters =[];
     
-    for(let i = 0; i < theData.length; i++){
-        for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
-            let n = true;
-            for(let k = 0; k < dic.length; k++){
-                if(dic[k].label == theData[i].moves[j]){ 
-                    dic[k].value++; 
-                    n = false;
-                    break;
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    
+    for(let i=0;i<theData.length;i++){
+            if(!grandMasters.includes(theData[i].White))
+                grandMasters.push(theData[i].White)
+            if(!grandMasters.includes(theData[i].Black))
+                grandMasters.push(theData[i].Black)
+        
+    }
+    console.log(grandMasters)
+    var dic = [];
+    
+    if(sort == 1){ //common opening moves
+        for(let i = 0; i < theData.length; i++){
+            for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
+                let n = true;
+                for(let k = 0; k < dic.length; k++){
+                    if(dic[k].label == theData[i].moves[j]){ 
+                        dic[k].value++; 
+                        n = false;
+                        break;
+                    }
                 }
-            }
-            if(n){
-                dic.push({"label": theData[i].moves[j], "value" : 1});
+                if(n){
+                    dic.push({"label": theData[i].moves[j], "value" : 1});
+                }
             }
         }
     }
-    
+
+    if(sort == 2){ //Wins by Color
+        for(let i = 0; i < theData.length; i++){
+            //for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
+                let n = true;
+                for(let k = 0; k < dic.length; k++){
+                    if(dic[k].label == theData[i].Result){ 
+                        dic[k].value++; 
+                        n = false;
+                        break;
+                    }
+                }
+                if(n){
+                    dic.push({"label": theData[i].Result, "value" : 1});
+                }
+            //}
+        }
+    }
+    if(sort == 3){
+        for(let i = 0; i < theData.length; i++){
+            //for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
+                let n = true;
+                for(let k = 0; k < dic.length; k++){
+                    if(dic[k].label == theData[i].White && theData[i].Result=="1-0"){ 
+                        dic[k].value++; 
+                        n = false;
+                        break;
+                    }
+                }
+                if(n){
+                    dic.push({"label": theData[i].White, "value" : 1});
+                }
+            //}
+        }
+    }
     console.log(dic);
     
     //create pie chart
@@ -55,7 +103,38 @@ function loadPieChart(mCountMin, mCountMax){
     
       arc.append("path") //shape of wedge
           .attr("d", path)
-          .attr("fill", function(d, i) { return color(i%7) });
+          .attr("fill", function(d, i) { return color(i%7) })
+          .on("mousemove", function(d){
+            tooltip
+            .style("left", d3.event.pageX - 50 + "px")
+            .style("top", d3.event.pageY - 70 + "px")
+            .style("display", "inline-block")
+            .style("position", "absolute")
+            .style("min-width", "80px")
+            .style("height", "auto")
+            .style("background", "none repeat scroll 0 0 #ffffff")
+            .style("padding", "14px")
+            .style("text-align", "center")
+            //Math.round(price / listprice * 100) / 100;
+            .html(function() { 
+                if(sort == 1) {
+                    return d.data.label + " : " + d.data.value;
+                }
+                else if(sort == 2){
+                    let temp = "";
+                    console.log(d.data.label)
+                    switch(d.data.label){
+                        case "1-0":temp="WHITE";break;
+                        case "0-1":temp="BLACK";break;
+                        case "1/2-1/2":temp="TIE";break;
+                        default :temp="N/A";break;
+                    }
+                    return temp + ":" + d.data.value
+                }
+            });
+            //.html(d.move + ", Wins: " + (d.win) + ", Losses:" + (d.loss) + ", Draws: " + (d.draw));
+            })
+            .on("mouseout", function(d){ tooltip.style("display", "none");});
 
       arc.append("text") //text for each wedge
           .attr("transform", function(d) { 
@@ -63,14 +142,36 @@ function loadPieChart(mCountMin, mCountMax){
             return "translate(" + label.centroid(d)[0] + "," + label.centroid(d)[1] + ") rotate(-90) rotate(" + (midAngle * 180/Math.PI) + ")"; })
           .attr("dy", ".35em")
           .attr('text-anchor','middle')
-          .text(function(d) { return d.data.label + " : " + d.data.value; });
+          .text(function(d) { 
+            if(sort == 1 && d.data.value >= 1000) { //common openings
+                return d.data.label + " : " + d.data.value;
+            }
+            else if(sort ==2){ //wins
+                let temp = "";
+                console.log(d.data.label)
+                switch(d.data.label){
+                    case "1-0":temp="WHITE";break;
+                    case "0-1":temp="BLACK";break;
+                    case "1/2-1/2":temp="TIE";break;
+                    default :temp="N/A";break;
+                }
+                return temp + ":" + d.data.value
+            }
+
+          });
     
     svg.append("text") // title
         .attr("x", 5)
         .attr("y", 20)
         .attr("id", "xAxisText")
         .style("text-anchor", "left")
-        .text("Common Opening Moves");
+        .text((d)=>{
+            if(sort==1)return "Common Opening Moves"
+            if(sort==2)return "Wins By Color"
+
+        });
+    
+    document.getElementById("gInfo").textContent = "This pie chart displays common opening moves that Grandmaster Chess players have used during tournaments. It looks at the first 4 turns that were made during a game and displays the number of times a move was used. This graph would help other Chess players improve because it would show them what opening Grandmasters use to play their games. ";
 }
 
 function loadHeatMap(mCountMin, mCountMax) {
@@ -115,6 +216,8 @@ function loadHeatMap(mCountMin, mCountMax) {
     svg.append("line").attr("x1", offset/2).attr("y1", offset/2).attr("x2", offset/2).attr("y2", height + offset/2).attr("stroke-width", 1).attr("stroke", "black");//left
     svg.append("line").attr("x1", width + offset/2).attr("y1", offset/2).attr("x2", width + offset/2).attr("y2", height + offset/2).attr("stroke-width", 1).attr("stroke", "black");//right
     
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    
     let maxNum = 0;
     for (let i = 0; i < 8; i++) {
          for (let j = 0; j < 8; j++) {
@@ -125,13 +228,28 @@ function loadHeatMap(mCountMin, mCountMax) {
                              .attr("height", (height/8))
                              .attr("x", ((width * i)/8) - (width/2))
                              .attr("y", ((height * j)/8) - (height/2))
-                             .attr("fill",returnBoardColor(i,j));
+                             .attr("fill",returnBoardColor(i,j))
+                             .on("mousemove", function(d){
+                                              tooltip
+                                .style("left", d3.event.pageX - 50 + "px")
+                                .style("top", d3.event.pageY - 70 + "px")
+                                .style("display", "inline-block")
+                                .style("position", "absolute")
+                                .style("min-width", "80px")
+                                .style("height", "auto")
+                                .style("background", "none repeat scroll 0 0 #ffffff")
+                                .style("padding", "14px")
+                                .style("text-align", "center")
+                                .html(board[i][j] + " moves");
+                          })
+                          .on("mouseout", function(d){ tooltip.style("display", "none");});
              
          }
     }
     
     console.log(maxNum);
     console.log(board);
+    
     
     for (let i = 0; i < 8; i++) {//visualize board
          for (let j = 0; j < 8; j++) {
@@ -144,7 +262,22 @@ function loadHeatMap(mCountMin, mCountMax) {
                              .attr("height", h)
                              .attr("x", x)
                              .attr("y", y)
-                             .attr("fill","rgba(255,0,0,.75)");
+                             .attr("fill","rgba(255,0,0,.75)")
+                             .on("mousemove", function(d){
+                                              tooltip
+                                .style("left", d3.event.pageX - 50 + "px")
+                                .style("top", d3.event.pageY - 70 + "px")
+                                .style("display", "inline-block")
+                                .style("position", "absolute")
+                                .style("min-width", "80px")
+                                .style("height", "auto")
+                                .style("background", "none repeat scroll 0 0 #ffffff")
+                                .style("padding", "14px")
+                                .style("text-align", "center")
+                                .html(board[i][j] + " moves");
+                          })
+                          .on("mouseout", function(d){ tooltip.style("display", "none");});
+                             
          }
     }
     
@@ -163,7 +296,10 @@ function loadHeatMap(mCountMin, mCountMax) {
             .attr("id", "xAxisText")
             .style("text-anchor", "left")
             .text(i);
-    }  
+    } 
+    
+    document.getElementById("gInfo").textContent = "This Heatmap displays what locations on the board pieces from both sides move to the most often during the openning moves of chess games";
+    
 }
 
 function returnBoardColor(x, y){
@@ -312,17 +448,59 @@ function loadBarGraph(movesShown, data){
 
     g.append("g")
         .attr("class", "axis");
+    
+    document.getElementById("gInfo").textContent = "";
+    
+}
 
+
+function loadGraph(){
+    
+    svg.remove("g");
+    svg = d3.select("body").append("svg")
+        .attr("width", width + offset)
+        .attr("height", height  + offset)
+        .style('border', '1px solid');
+    g = svg.append("g").attr("transform", "translate(" + (width + offset) / 2 + "," + (height + offset) / 2 + ")");
+    
+    let radios = document.getElementsByName("radio");
+    
+    for (var i = 0, length = radios.length; i < length; i++)
+    {
+         if (radios[i].checked)
+         {
+            switch(radios[i].value){
+               case "pie1":
+                    loadPieChart(0,6,1);
+                    break;
+               case "pie2":
+                    loadPieChart(0,6,2);
+                    break;
+               case "heat":
+                    loadHeatMap(0, 8);
+                    break;
+               case "bar":
+                    loadBarGraph(20, theData);
+                    break;
+               default:
+                    break;
+               }
+          // only one radio can be logically checked, don't check the rest
+          break;
+         }
+    }
+    
+    
 }
 
 function readData(){
     d3.json("GMallboth(5%).json", function(data){
         theData = data;
-        /*console.log("HIT")
-        console.log(data);
-        console.log(theData);*/
+        //console.log(theData);
+        //loadPieChart(0,6);
         //loadHeatMap(0, 2);
-        loadBarGraph(20, theData);
+        //loadBarGraph(20, theData);
+        loadGraph();
         
     });
 }
@@ -333,5 +511,6 @@ window.onload = function(){
         .attr("height", height  + offset)
         .style('border', '1px solid');
     g = svg.append("g").attr("transform", "translate(" + (width + offset) / 2 + "," + (height + offset) / 2 + ")");
+    document.getElementById("radioForm").onclick = function(){loadGraph();};
     readData(); 
 };
