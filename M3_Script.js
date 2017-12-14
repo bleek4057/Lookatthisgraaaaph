@@ -170,8 +170,12 @@ function loadPieChart(mCountMin, mCountMax, sort){
             if(sort==2)return "Wins By Color"
 
         });
-    
-    document.getElementById("gInfo").textContent = "This pie chart displays common opening moves that Grandmaster Chess players have used during tournaments. It looks at the first 4 turns that were made during a game and displays the number of times a move was used. This graph would help other Chess players improve because it would show them what opening Grandmasters use to play their games. ";
+    if(sort == 1){
+        document.getElementById("gInfo").textContent = "This pie chart displays common opening moves that Grandmaster Chess players have used during tournaments. It looks at the first 4 turns that were made during a game and displays the number of times a move was used. This graph would help other Chess players improve because it would show them what opening Grandmasters use to play their games.";
+    }
+    else if( sort == 2){
+        document.getElementById("gInfo").textContent = "This pie chart simply shows what side wins most often. As you can see, at a grandmaster level, it is very benefical to be white and go first. But, also at a grandmaster level, most games end in a tie";
+    }
 }
 
 function loadHeatMap(mCountMin, mCountMax) {
@@ -298,7 +302,7 @@ function loadHeatMap(mCountMin, mCountMax) {
             .text(i);
     } 
     
-    document.getElementById("gInfo").textContent = "This Heatmap displays what locations on the board pieces from both sides move to the most often during the openning moves of chess games";
+    document.getElementById("gInfo").textContent = "This Heatmap displays what locations on the board pieces from both sides move to the most often during the openning moves of chess games. This would help chess player determine what spots they should either move to get get an advantage.";
     
 }
 
@@ -449,7 +453,7 @@ function loadBarGraph(movesShown, data){
     g.append("g")
         .attr("class", "axis");
     
-    document.getElementById("gInfo").textContent = "";
+    document.getElementById("gInfo").textContent = "This bar graph shows a move and how the game could end because of it. This could help a chess player determine waht moves they should make and if it would help them in the long run.";
     
 }
 
