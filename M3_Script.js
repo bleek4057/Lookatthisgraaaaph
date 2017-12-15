@@ -520,7 +520,8 @@ window.onload = function(){
     svg = d3.select("body").append("svg")
         .attr("width", width + offset)
         .attr("height", height  + offset)
-        .style('border', '1px solid');
+        .style('id', 'graphs')
+        .style('stroke','0');
     g = svg.append("g").attr("transform", "translate(" + (width + offset) / 2 + "," + (height + offset) / 2 + ")");
     document.getElementById("radioForm").onclick = function(){loadGraph();};
     readData(); 

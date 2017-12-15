@@ -1,33 +1,95 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+    
     <head>
         <meta charset="utf-8">
         <title>Paper Oxen Milestone 3</title>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="M3_Script.js"></script>
+
+        <style>
+            body{
+                background-color: #373d3d;
+                font-family: verdana;
+                color: #cdd0d8;
+            }
+
+            #graphs{
+                margin-right: 10%;
+                margin-top: 5%;
+                margin-left: 10%;
+                float:right;
+                border:none !important;
+                outline:none !important;
+            }
+            #radioForm{
+                margin-right: 10%;
+                margin-top: 5%;
+                margin-left: 10%;
+            }
+            #gInfo{
+                margin-right: 10%;
+                margin-top: 5%;
+                margin-left: 10%;
+            }
+            #top{
+                background-color: #272d2d;
+                width: 100%;
+                height: 20%;
+            }
+            h1{
+                margin: 0 auto;
+                color: #d1d1d1;
+                font-size: 36;
+                text-align: center;
+            }
+            #righside{
+
+            }
+            #leftside{
+                width: 55%;
+                float: left;
+                margin-top: 1%;
+                padding-bottom: 1%;
+                background-color: #272d2d;
+            }
+            svg{
+                margin-top: 1%;
+                float:right;
+                border:none !important;
+                outline:none !important;
+                background-color: #272d2d;
+            }
+        </style>
     </head>
     
     <body>
-        <a href="../../index.html"><button>Return to Index</button></a>
-        <p id="gInfo">
-            This pie chart displays common opening moves that Grandmaster Chess players have used during tournaments. It looks at the first 4 turns that were made during a game and displays the number of times a move was used. This graph would help other Chess players improve because it would show them what opening Grandmasters use to play their games. 
-        </p>
+        <div id="top">
+            <a href="../../index.html"><button>Return to Index</button></a>
+            <h1>Look at this Graph</h1>
+            
+        </div>
         <!-- <p>
             Currently, our group is having a bit of trouble parsing our data correctly from PGN (Portable Game Notation) to JSON. So for this chart, it is only pulling from ten games. Once we fix the parsing, it will be parsing from many thousands of games.
 
         </p> -->
-        <form id="radioForm">
-            <input type="radio" name="radio" value="pie1" checked> Pie Opening <br/>
-            <input type="radio" name="radio" value="pie2"> Pie Winnings <br/>
-            <input type="radio" name="radio" value="pie3" style="display:inline;"> Pie Winnings By GrandMaster
-            <select id="gmSelect" style="display:inline-block;" name="gmSelect">
+        <div id="leftside">
+            <p id="gInfo">
+                This pie chart displays common opening moves that Grandmaster Chess players have used during tournaments. It looks at the first 4 turns that were made during a game and displays the number of times a move was used. This graph would help other Chess players improve because it would show them what opening Grandmasters use to play their games. 
+            </p>
 
-            </select><br/>
-            <input type="radio" name="radio" value="heat" > Heat <br/>
-            <input type="radio" name="radio" value="bar"> Bar <br/>
-        </form>
+            <form id="radioForm">
+                <input type="radio" name="radio" value="pie1" checked> Pie Opening <br/>
+                <input type="radio" name="radio" value="pie2"> Pie Winnings <br/>
+                <input type="radio" name="radio" value="pie3" style="display:inline;"> Pie Winnings By GrandMaster
+                <select id="gmSelect" style="display:inline-block;" name="gmSelect">
+
+                </select><br/>
+                <input type="radio" name="radio" value="heat" > Heat <br/>
+                <input type="radio" name="radio" value="bar"> Bar <br/>
+            </form>
+        </div>
     </body>
     <!-- https://youtu.be/sIlNIVXpIns -->
 </html>
