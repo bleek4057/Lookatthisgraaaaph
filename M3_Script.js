@@ -320,9 +320,9 @@ function returnBoardColor(x, y){
     else {return "rgba(0,0,0,1)";}//black
 }
 
-function loadBarGraph(movesShown, data){
-    console.log(data);
-    var svg = d3.select("svg"),
+function loadBarGraph(movesShown){
+    //console.log(data);
+    //var svg = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 30, left: 80},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
@@ -339,36 +339,31 @@ function loadBarGraph(movesShown, data){
         var dic = [];
 
         //win, loss, draw
-        var wins = 0; var losses = 0; var draws = 0;
+        //var wins = 0; var losses = 0; var draws = 0;
 
         //Find every game in which this move was used
-        for(let i = 0; i < data.length; i++){
-            for(let j = 0; j < data[i].moves.length; j++){
+        for(let i = 0; i < theData.length; i++){
+            for(let j = 0; j < theData[i].moves.length; j++){
                 let n = true;
-
-                let win = false;
-                let loss = false;
-                let draw = false;
-
                 for(let k = 0; k < dic.length; k++){
-                    if(dic[k].move == data[i].moves[j]){
+                    if(dic[k].move == theData[i].moves[j]){
                         dic[k].count++;
                         //console.log("Win: " + data[i].Result);
-                        if(data[i].Result === "0-1"){
+                        if(theData[i].Result === "0-1"){
                             //console.log(data[i].moves[j] + " 0-1");
-                            win = true;
+                            //win = true;
                             dic[k].win++;
-                            wins++;
-                        }else if(data[i].Result === "1-0"){
+                            //wins++;
+                        }else if(theData[i].Result === "1-0"){
                             //console.log(data[i].moves[j] + " 1-0");
-                            loss = true;
+                            //loss = true;
                             dic[k].loss++;
-                            losses++;
-                        }else if(data[i].Result === "1/2-1/2"){
+                            //losses++;
+                        }else if(theData[i].Result === "1/2-1/2"){
                             //console.log(data[i].moves[j] + " 1/2-1/2");
-                            draw = true;
+                            //draw = true;
                             dic[k].draw++;
-                            draws++;
+                            //draws++;
                         }
 
                         //console.log(data[i].moves[j] + " , " + data[i].Result + ", win: " + win);
@@ -377,12 +372,12 @@ function loadBarGraph(movesShown, data){
                     }
                 }
                 if(n){
-                    dic.push({"move": data[i].moves[j], "count" : 1, "win" : 1, "loss" : 1, "draw" : 1});
+                    dic.push({"move": theData[i].moves[j], "count" : 1, "win" : 1, "loss" : 1, "draw" : 1});
                 }
             }
         }
 
-    console.log("wins: " + wins + ", losses: " + losses + ", draws: " + draws );
+    //console.log("wins: " + wins + ", losses: " + losses + ", draws: " + draws );
     dic.sort(function(a, b) { return b.count - a.count; });
     
     /*for(var i = 0; i < 20; i++){
@@ -391,7 +386,7 @@ function loadBarGraph(movesShown, data){
 
     var splicedDic = [];
     spicedDic = dic.splice(0, 20);
-    console.log(spicedDic.length);
+    //console.log(spicedDic.length);
 
 
     //var svg = d3.select("svg"),
@@ -434,7 +429,7 @@ function loadBarGraph(movesShown, data){
       .enter().append("rect")
         .attr("x", function(d) { return x(d.data.move); })
         .attr("y", function(d) { return y(d[1]); })
-        .attr("height", function(d) { console.log(d); /*return y(d.count) - y(d.data.win);*/return y(d[0]) - y(d[1]); })
+        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
         .attr("width", x.bandwidth())
         
         .on("mousemove", function(d){
@@ -462,7 +457,7 @@ function loadBarGraph(movesShown, data){
     g.append("g")
         .attr("class", "axis");
     
-    document.getElementById("gInfo").textContent = "This bar graph shows a move and how the game could end because of it. This could help a chess player determine waht moves they should make and if it would help them in the long run.";
+    document.getElementById("gInfo").textContent = "This bar graph shows the most common moves made by grandmasters and the percentage of games containing those moves that were wins, losses or draws. This provides an interesting look into what moves are the most common and successful.";
     
 }
 
@@ -496,7 +491,7 @@ function loadGraph(){
                     loadHeatMap(0, 8);
                     break;
                case "bar":
-                    loadBarGraph(20, theData);
+                    loadBarGraph(20);
                     break;
                default:
                     break;
