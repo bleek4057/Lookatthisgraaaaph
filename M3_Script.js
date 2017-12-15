@@ -19,7 +19,7 @@ function loadPieChart(mCountMin, mCountMax, sort){
     .outerRadius(radius - 40)
     .innerRadius(radius - 40);
     var grandMasters =[];
-
+    var gmSelect
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
     
     for(let i=0;i<theData.length;i++){
@@ -33,7 +33,7 @@ function loadPieChart(mCountMin, mCountMax, sort){
     grandMasters.sort();
     grandMasters.shift();
     for(let i=0;i<grandMasters.length;i++){
-        let gmSelect = document.getElementById("gmSelect");
+        gmSelect = document.getElementById("gmSelect");
         let option = document.createElement("option");
         option.text=grandMasters[i];
         gmSelect.add(option);
@@ -77,23 +77,32 @@ function loadPieChart(mCountMin, mCountMax, sort){
         }
     }
     if(sort == 3){
+        let selectedGM = gmSelect.options[gmSelect.selectedIndex].text;
+        dic.push({"label": "White Win", "value" : 0});
+        dic.push({"label": "Black Win", "value" : 0});
+        dic.push({"label": "Tie", "value" : 0});
+        //console.log(dic)
+        //console.log(gmSelect.options[gmSelect.selectedIndex].text)
         for(let i = 0; i < theData.length; i++){
-            //for(let j = 0; j < theData[i].moves.length && j >= mCountMin && j < mCountMax; j++){
-                let n = true;
-                for(let k = 0; k < dic.length; k++){
-                    if(dic[k].label == theData[i].White && theData[i].Result=="1-0"){ 
-                        dic[k].value++; 
-                        n = false;
-                        break;
-                    }
-                }
-                if(n){
-                    dic.push({"label": theData[i].White, "value" : 1});
-                }
-            //}
+            if(theData[i].White==selectedGM&&theData[i].Result=="1-0"){
+                dic[0].value+=1;
+                
+                //dic[0]
+            }
+            if(theData[i].Black==selectedGM&&theData[i].Result=="0-1"){
+                dic[1].value+=1;
+                
+                //dic[0]
+            }
+            if((theData[i].White==selectedGM || theData[i].Black==selectedGM)&&theData[i].Result=="1/2-1/2"){
+                dic[2].value+=1;
+                
+                //dic[0]
+            }
         }
     }
-    console.log(dic);
+    console.log(dic)
+    //console.log(dic);
     
     //create pie chart
     
@@ -166,7 +175,9 @@ function loadPieChart(mCountMin, mCountMax, sort){
                 }
                 return temp + ":" + d.data.value
             }
-
+            else if(sort ==3){
+                return d.data.label + " : " + d.data.value;
+            }
           });
     
     svg.append("text") // title
@@ -505,7 +516,7 @@ function loadGraph(){
 }
 
 function readData(){
-    d3.json("GMallboth5.json", function(data){
+    d3.json("GMallboth.json", function(data){
         theData = data;
         //console.log(theData);
         //loadPieChart(0,6);
